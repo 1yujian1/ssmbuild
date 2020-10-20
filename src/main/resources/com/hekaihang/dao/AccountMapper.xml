@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hekaihang.dao.AccountMapper">
+    <insert id="addAccount" parameterType="Accounts">
+        insert into oil_crm.account  (password, department, name)
+        values ("000000","实习生",#{name});
+    </insert>
+
+    <delete id="deleteAccountById" parameterType="int">
+        delete from oil_crm.account where id=#{id};
+    </delete>
+
+    <update id="updateAccount" parameterType="Accounts">
+        update oil_crm.account
+        set name=#{name},sex=#{sex},phone=#{phone},email=#{email},address=#{address}
+        where id=#{id};
+    </update>
+
+    <update id="updateAccountPass" parameterType="Accounts">
+        update oil_crm.account
+        set password=#{password}
+        where id=#{id};
+    </update>
+
+    <update id="updateAccountDepart" parameterType="Accounts">
+        update oil_crm.account
+        set department=#{department}
+        where id=#{id};
+    </update>
+
+
+
+    <select id="queryAccountById" resultType="Accounts">
+        select * from oil_crm.account
+        where id=#{id};
+    </select>
+
+    <select id="queryAllAccount"  resultType="Accounts">
+        select * from oil_crm.account;
+    </select>
+
+    <select id="queryAllAccount0"  resultType="Accounts">
+        select * from oil_crm.account where authority=0;
+    </select>
+
+    <select id="queryAccountByIdPass" resultType="Accounts">
+        select  * from oil_crm.account
+        where id=#{id} and password=#{password};
+    </select>
+
+    <select id="queryAccountByName" resultType="Accounts">
+        select  * from oil_crm.account
+        where name like #{name};
+    </select>
+
+    <select id="queryAccountByDepart" resultType="Accounts">
+        select  * from oil_crm.account
+        where department like #{department};
+    </select>
+
+
+
+</mapper>

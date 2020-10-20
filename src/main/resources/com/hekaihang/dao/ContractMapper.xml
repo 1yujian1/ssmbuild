@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hekaihang.dao.ContractMapper">
+
+    <insert id="addContract" parameterType="Contracts">
+        insert into oil_crm.contract(scontract,  sorder, scontract_name)
+        values (#{scontract},#{scontract},#{scontract_name});
+    </insert>
+
+    <delete id="deleteContractById" parameterType="int">
+        delete from oil_crm.serve where scontract=#{scontract};
+    </delete>
+
+
+
+    <select id="queryAllContracts" resultType="Contracts">
+        select * from oil_crm.serve
+        ;
+    </select>
+
+    <select id="queryContractsById"  resultType="Contracts">
+        select * from oil_crm.serve where scontract=#{scontract};
+    </select>
+
+
+</mapper>

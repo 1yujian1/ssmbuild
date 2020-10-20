@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hekaihang.dao.CompanyMapper">
+
+    <insert id="addCompany" parameterType="Companies">
+        insert into oil_crm.company (coname,coadress,cophone,csort,cname,csex,cphone,cemail,remark)
+        values (#{coname},#{coadress},#{cophone},#{csort},#{cname},#{csex},#{cphone},#{cemail},#{remark})
+    </insert>
+
+    <delete id="deleteCompany" parameterType="String">
+        delete from oil_crm.company where coname = #{coname};
+    </delete>
+
+    <update id="updateCompany" parameterType="Companies">
+        update oil_crm.company
+        set coadress=#{coadress},cophone=#{cophone}
+        where coname=#{coname};
+    </update>
+
+    <select id="queryAllCompany"  resultType="Companies">
+        select * from oil_crm.company;
+    </select>
+
+
+    <select id="findCompanySort"  resultType="String">
+        select csort from oil_crm.company where coname=#{coname};
+    </select>
+
+
+    <select id="queryAllCompanyName"  resultType="String">
+        select coname from oil_crm.company;
+    </select>
+
+    <select id="queryCompany_makeup" resultType="java.util.HashMap">
+        select csort as department,count(*) as num from oil_crm.company group by csort;
+    </select>
+
+    <select id="queryCompany_devote" resultType="java.util.HashMap">
+        select csort as department,sum(coorder) as num from oil_crm.company group by csort;
+    </select>
+
+
+    <select id="queryCompanyByName" resultType="Companies">
+        select * from oil_crm.company
+        <if test="coname!=''">
+            where coname like #{coname}
+        </if>
+    </select>
+
+
+</mapper>

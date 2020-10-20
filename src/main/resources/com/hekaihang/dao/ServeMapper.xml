@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hekaihang.dao.ServeMapper">
+
+    <insert id="addServe" parameterType="Serves">
+        insert into oil_crm.serve (sserver, scompany,  serve_title, serve_content, serve_creater,sorder,scontract)
+        values (#{sserver},#{scompany},#{serve_title},#{serve_content},#{serve_creater},#{sorder},#{scontract});
+    </insert>
+
+
+
+
+    <delete id="deleteServe" parameterType="int">
+        delete from oil_crm.serve where sid=#{sid};
+    </delete>
+
+
+
+    <select id="findServeById" resultType="Serves">
+        select * from oil_crm.serve
+        where sid=#{sid};
+    </select>
+
+    <select id="findAllServe"  resultType="Serves">
+        select * from oil_crm.serve;
+    </select>
+
+    <select id="findLastServeId" resultType="int">
+        select sid  from oil_crm.serve order by sid desc limit 1 ;
+    </select>
+
+
+</mapper>

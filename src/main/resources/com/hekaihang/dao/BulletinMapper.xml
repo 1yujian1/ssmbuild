@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hekaihang.dao.BulletinMapper">
+    <insert id="addBulletin" parameterType="Bulletins">
+        insert into oil_crm.bulletin (admin_id, time, title, message)
+        values (#{admin_id},#{time},#{title},#{message});
+    </insert>
+
+    <delete id="deleteBulById" parameterType="int">
+        delete from oil_crm.bulletin where bul_id=#{bul_id};
+    </delete>
+
+    <update id="updateBul" parameterType="Bulletins">
+        update oil_crm.bulletin
+        set   message=#{message}
+        where bul_id=#{bul_id};
+    </update>
+
+
+
+    <select id="queryAllBul"  resultType="Bulletins">
+        SELECT a.name as admin_name, b.admin_id, b.bul_id,b.message,b.time,b.title
+        FROM account a, bulletin b
+        WHERE a.id = b.admin_id order by b.bul_id desc;
+    </select>
+
+    <select id="queryBulByadmin_id" resultType="Bulletins">
+        SELECT a.name as admin_name, b.admin_id, b.bul_id,b.message,b.time,b.title
+        FROM account a, bulletin b
+        WHERE a.id = b.admin_id and b.admin_id=#{id} order by b.bul_id desc;
+    </select>
+
+    <select id="queryBulBytitle" resultType="Bulletins">
+        SELECT a.name as admin_name, b.admin_id, b.bul_id,b.message,b.time,b.title
+        FROM account a, bulletin b
+        WHERE a.id = b.admin_id and b.title=#{title} order by b.bul_id desc;
+    </select>
+
+    <select id="queryBulByadmin_idtitle" resultType="Bulletins">
+        SELECT a.name as admin_name, b.admin_id, b.bul_id,b.message,b.time,b.title
+        FROM  bulletin b left join account a on a.id = b.admin_id
+        WHERE b.admin_id=#{id} and b.title=#{title} order by b.bul_id desc;
+
+    </select>
+
+</mapper>

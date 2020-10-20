@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hekaihang.dao.OrderMapper">
+
+    <insert id="addOrder" parameterType="Orders">
+        insert into oil_crm.order (sorder, product_id, product_num, sorder_status)
+        values (#{sorder},#{product_id},#{product_num},'成功');
+    </insert>
+
+    <delete id="deleteOrderById" parameterType="int">
+        delete from oil_crm.order where sorder=#{sorder};
+    </delete>
+
+
+
+    <select id="queryAllOrders" resultType="Orders">
+        select * from oil_crm.order
+        ;
+    </select>
+
+    <select id="queryOrdersById"  resultType="Orders">
+        select * from oil_crm.order where sorder=#{sorder};
+    </select>
+
+
+</mapper>
